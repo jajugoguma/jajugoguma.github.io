@@ -54,6 +54,15 @@
     <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
     <script>
+        function processFile(file) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                console.log('File content:', event.target.result);
+                editor.setMarkdown(event.target.result);
+            };
+            reader.readAsText(file);
+        }
+
         const { Editor } = toastui;
         const { codeSyntaxHighlight } = Editor.plugin;
         const { colorSyntax } = Editor.plugin;
@@ -131,6 +140,35 @@
         }
         });
 
+        editor.eventManager.addEventType('uploadButton');
+        editor.eventManager.listen('uploadButton', function() {
+            if (!confirm("기존 내용이 모두 삭제됩니다. 계속 하시겠습니까?")) {
+                alert("취소되었습니다.");
+                return;
+            }
+
+            var input = document.createElement("input");
+            input.type = "file";
+            input.accept = "text.md"; // 확장자가 xxx, yyy 일때, ".xxx, .yyy"
+            input.onchange = function (event) {
+                processFile(event.target.files[0]);
+            };
+            console.log(input);
+            input.click();
+        });
+
+        toolbar.insertItem(1, {
+        type: 'button',
+        options: {
+            className: 'first',
+            event: 'uploadButton',
+            tooltip: 'Upload file',
+            text: '⇡',
+            style: 'background:none; font-weight:bold; color:black;'
+        }
+        });
+
+        
         editor.eventManager.addEventType('viewButton');
         editor.eventManager.listen('viewButton', function() {
             var data = editor.getMarkdown();
@@ -144,7 +182,7 @@
                     console.log(editor.getCurrentPreviewStyle());
         });
 
-        toolbar.insertItem(1, {
+        toolbar.insertItem(2, {
         type: 'button',
         options: {
             className: 'first',
@@ -159,6 +197,13 @@
         {
             viewer.setMarkdown(editor.getMarkdown());
         };
+
+        function ToView()
+        {
+            viewer.setMarkdown(editor.getMarkdown());
+        };
+        
+        
 
     </script>
 </body>
