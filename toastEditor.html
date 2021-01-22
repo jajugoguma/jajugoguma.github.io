@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title>Markdown Editor</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
+
+</head>
+<body>
+
+   
+    <div class="tui-doc-description">
+        <br>
+        <a href="/">
+            <img src="https://camo.githubusercontent.com/5d5d1faf2493898112ec87f59fcafbc2f8da37b74826df199713d62eb7191fd4/68747470733a2f2f756963646e2e746f6173742e636f6d2f746f61737475692f696d672f7475692d656469746f722d62692e706e67" 
+            style="display: block; margin: 0 auto;">
+        </a>
+    
+        <button class="btn mDownBtn" type="submit" style="margin-left: 20px; margin-bottom: 10px;" onclick="btnClick();">Download<br>Markdown</button>
+        <script>
+            function btnClick() {
+                var mdFile;
+                var downloadLink;
+
+                // CSV 파일을 위한 Blob 만들기
+                mdFile = new Blob([editor.getMarkdown()], {type: "text"})
+
+                // Download link를 위한 a 엘리먼스 생성
+                downloadLink = document.createElement("a")
+
+                // 다운받을 csv 파일 이름 지정하기
+                downloadLink.download = "markdown.md";
+
+                // 위에서 만든 blob과 링크를 연결
+                downloadLink.href = window.URL.createObjectURL(mdFile)
+
+                // 링크가 눈에 보일 필요는 없으니 숨겨줍시다.
+                downloadLink.style.display = "none"
+
+                // HTML 가장 아래 부분에 링크를 붙여줍시다.
+                document.body.appendChild(downloadLink)
+
+                // 클릭 이벤트를 발생시켜 실제로 브라우저가 '다운로드'하도록 만들어줍시다.
+                downloadLink.click()
+            }
+        </script>
+        <br>
+    </div>
+
+    <div class="code-html tui-doc-contents">
+        <div id="editor" style="height: 1000px;"></div>
+    </div>
+    
+    <script src="https://uicdn.toast.com/editor/2.0.0/toastui-editor-all.min.js"></script>
+    <script src="https://uicdn.toast.com/tui-grid/v4.10.0/tui-grid.min.js"></script>
+
+    <script>
+
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            previewStyle: 'vertical',
+            initialEditType: "markdown",
+            height: 'auto',
+        });
+
+        function ToView()
+        {
+            viewer.setMarkdown(editor.getMarkdown());
+        };
+
+    </script>
+</body>
+</html>
