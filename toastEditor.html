@@ -38,7 +38,7 @@
 
     <br>
 
-    <div class="code-html tui-doc-contents" style="width: 95%; height: 90%; display: block; margin: 0 auto;">
+    <div class="code-html tui-doc-contents" id="editorDrop" style="width: 95%; height: 90%; display: block; margin: 0 auto;">
         <div id="editor" style="height: auto;"></div>
         <p id="autoSaveDate" style="color: lightslategray;">저장되지 않음.</p>
     </div>
@@ -47,6 +47,7 @@
     <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.min.js"></script>
     <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
     <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 
     <script>
 
@@ -55,7 +56,6 @@
         function processFile(file) {
             var reader = new FileReader();
             reader.onload = function(event) {
-                console.log('File content:', event.target.result);
                 editor.setMarkdown(event.target.result);
             };
             reader.readAsText(file);
@@ -157,7 +157,6 @@
             input.onchange = function (event) {
                 processFile(event.target.files[0]);
             };
-            console.log(input);
             input.click();
         });
 
@@ -175,14 +174,13 @@
         editor.eventManager.addEventType('viewButton');
         editor.eventManager.listen('viewButton', function() {
             var data = editor.getMarkdown();
-            console.log(editor.previewStyle);
-                    if (editor.getCurrentPreviewStyle() == 'tab') {
-                        editor.changePreviewStyle('vertical')
-                    }
-                    else {
-                        editor.changePreviewStyle('tab')
-                    }
-                    console.log(editor.getCurrentPreviewStyle());
+  
+            if (editor.getCurrentPreviewStyle() == 'tab') {
+                editor.changePreviewStyle('vertical')
+            }
+            else {
+                editor.changePreviewStyle('tab')
+            }
         });
 
         toolbar.insertItem(2, {
@@ -203,22 +201,55 @@
 
         autoSave = setInterval(function() {
             if (isModified) {
-                localStorage.clear;
-                localStorage.setItem("markdown", editor.getMarkdown());
-
-                var nowTime = getNow() + "에 저장됨.";
-                localStorage.setItem("savedTime", nowTime);
-                document.getElementById("autoSaveDate").innerHTML = nowTime;
-
-                isModified = false;
+                save();
             }
         }, 5000);
+
+        function save() {
+            localStorage.clear;
+            localStorage.setItem("markdown", editor.getMarkdown());
+
+            var nowTime = getNow() + "에 저장됨.";
+            localStorage.setItem("savedTime", nowTime);
+            document.getElementById("autoSaveDate").innerHTML = nowTime;
+
+            isModified = false;
+        }
 
         function getNow() {
             var now = new Date;
             return now.getFullYear() + '/' + now.getMonth() + 1 + '/' + now.getDate().toString().padStart(2, '0') + ' ' + 
                 now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
         }
+
+        var holder = document.getElementById('editorDrop');
+
+        holder.ondragover = function() {
+            this.className = 'hover';
+            return false;
+        };
+        holder.ondragend = function() {
+            this.className = '';
+            return false;
+        };
+        holder.ondrop = function(e) {
+            this.className = '';
+            e.preventDefault();
+
+            var file = e.dataTransfer.files[0],
+                reader = new FileReader();
+            reader.onload = function(event) {
+                if (!confirm("기존 내용이 모두 삭제됩니다. 계속 하시겠습니까?")) {
+                alert("취소되었습니다.");
+                return;
+                }
+                editor.setMarkdown(event.target.result);
+                save();
+            };
+            reader.readAsText(file);
+
+            return false;
+        };
 
     </script>
 </body>
