@@ -22,28 +22,21 @@
 </head>
 <body>
 
-    <div class="tui-doc-description" style="position:absolute; right: 90px;">
+    <div class="daen-kim" style="position:absolute; right: 90px;">
         <a href="/">
             <img src="https://avatars1.githubusercontent.com/u/41339744?s=400&u=8ab826c81062c6c3d2db3b7cafc0d5d9787d67b8&v=4" style="border-radius: 70%; height: 60px;">
         </a>
     </div>
    
-    <div class="tui-doc-description" style="text-align: center;">
+    <div class="tui-logo" style="text-align: center;">
         <br>
         <a href="/toastEditor.html">
             <img src="https://camo.githubusercontent.com/5d5d1faf2493898112ec87f59fcafbc2f8da37b74826df199713d62eb7191fd4/68747470733a2f2f756963646e2e746f6173742e636f6d2f746f61737475692f696d672f7475692d656469746f722d62692e706e67">
         </a>
     </div>
 
-    
-    
+    <br>
 
-    <div>
-
-        
-
-            <br>
-    </div>
     <div class="code-html tui-doc-contents" style="width: 95%; height: 90%; display: block; margin: 0 auto;">
         <div id="editor" style="height: auto;"></div>
     </div>
@@ -54,6 +47,9 @@
     <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
     <script>
+
+        var isModified = false;
+
         function processFile(file) {
             var reader = new FileReader();
             reader.onload = function(event) {
@@ -74,7 +70,13 @@
             minHeight: '300px',
             height: '100%',
             plugins: [codeSyntaxHighlight, colorSyntax],
-            viewer: true
+            viewer: true,
+            events: {
+                change: function ()
+                {
+                    isModified = true;
+                }
+            }
         });
 
         // Using Method: Customize the first button
@@ -168,7 +170,6 @@
         }
         });
 
-        
         editor.eventManager.addEventType('viewButton');
         editor.eventManager.listen('viewButton', function() {
             var data = editor.getMarkdown();
@@ -193,17 +194,18 @@
         }
         });
 
-        function ToView()
-        {
-            viewer.setMarkdown(editor.getMarkdown());
-        };
+        window.onload = function () {
+            editor.setMarkdown(localStorage.getItem("markdown"));
+        }
 
-        function ToView()
-        {
-            viewer.setMarkdown(editor.getMarkdown());
-        };
-        
-        
+        autoSave = setInterval(function() {
+            if (isModified) {
+                localStorage.clear;
+                localStorage.setItem("markdown", editor.getMarkdown());
+
+                isModified = false;
+            }
+        }, 5000);
 
     </script>
 </body>
