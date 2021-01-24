@@ -15,8 +15,8 @@ author: Daeyeon Kim
 
 navbar-links:
   About Me: "aboutme"
-  Resources:
-    - Markdown Editor: "/toastEditor.html"
+  #Resources:
+  #  - Markdown Editor: "/toastEditor.html"
   MarkDown Editor: "/toastEditor.html"
 
 # --- Logo --- #
@@ -76,7 +76,7 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "jajugoguma.github.com"
+url-pretty: "jajugoguma.github.io"
 
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
 excerpt_length: 50
