@@ -16,28 +16,48 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css" />
     <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/sidebar/sidebar.css">
 
 </head>
-<body>
+<body style="margin: 0">
+    <dvi style="position: fixed; background: white; width: 100%; height: 70px; margin-top: 0px; z-index: 2;">
 
-    <div class="daen-kim" style="position:absolute; right: 90px;">
-        <a href="/">
-            <img src="https://avatars1.githubusercontent.com/u/41339744?s=400&u=8ab826c81062c6c3d2db3b7cafc0d5d9787d67b8&v=4" style="border-radius: 70%; height: 60px;">
-        </a>
-    </div>
-   
-    <div class="tui-logo" style="text-align: center;">
-        <br>
-        <a href="/toastEditor.html">
-            <img src="https://camo.githubusercontent.com/5d5d1faf2493898112ec87f59fcafbc2f8da37b74826df199713d62eb7191fd4/68747470733a2f2f756963646e2e746f6173742e636f6d2f746f61737475692f696d672f7475692d656469746f722d62692e706e67">
-        </a>
+        <div class="menu" style="position: fixed; left: 3%; display: block; margin-top: 5px;">
+            <span class="openmenu" onclick='openNav()'>
+                <img src="https://user-images.githubusercontent.com/41339744/105716486-370d8a00-5f62-11eb-87a7-cf6cf0109003.png" style="height: 60px;" draggable="false">
+            </span>
+        </div>
+
+        <div class="daen-kim" style="position:fixed; right: 3.5%; margin-top: 5px;">
+            <a href="/" draggable="false">
+                <img src="https://avatars1.githubusercontent.com/u/41339744?s=400&u=8ab826c81062c6c3d2db3b7cafc0d5d9787d67b8&v=4" style="border-radius: 70%; height: 60px;" draggable="false">
+            </a>
+        </div>
+    
+        <div class="tui-logo" style="text-align: center;width: 315px; margin: 0 auto; position: fixed; left: 50%; transform: translateX(-50%);">
+            <br>
+            <a href="/toastEditor.html" draggable="false">
+                <img src="https://camo.githubusercontent.com/5d5d1faf2493898112ec87f59fcafbc2f8da37b74826df199713d62eb7191fd4/68747470733a2f2f756963646e2e746f6173742e636f6d2f746f61737475692f696d672f7475692d656469746f722d62692e706e67" draggable="false">
+            </a>
+        </div>
+
+    </dvi>
+
+    <div id="mysidenav" class="sidenav">
+        <a href="#" class="closebtn" onclick='closeNav()'>x</a>
+        <a href="#" class="editorbtn" onclick="editorBtnClick()">Editor</a>
+		<a href="#" class="logbtn" onclick="logBtnClick()">Log</a>
     </div>
 
     <br>
 
-    <div class="code-html tui-doc-contents" id="editorDrop" style="width: 95%; height: 90%; display: block; margin: 0 auto;">
+    <div class="code-html tui-doc-contents" id="editorDrop" style="width: 95%; height: 90%; display: block; margin: auto; margin-top: 52px;">
         <div id="editor" style="height: auto;"></div>
         <p id="autoSaveDate" style="color: lightslategray;">저장되지 않음.</p>
+    </div>
+
+    <div id="logList" style="width: 95%; display: none; margin: auto;">      
     </div>
     
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
