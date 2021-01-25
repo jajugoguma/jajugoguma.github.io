@@ -141,6 +141,38 @@ var isModified = false;
         }
         });
 
+        editor.eventManager.addEventType('clipButton');
+        editor.eventManager.listen('clipButton', function() {
+            var tempElem = document.createElement('textarea');
+            tempElem.value = editor.getMarkdown();  
+            document.body.appendChild(tempElem);
+
+            tempElem.select();
+            document.execCommand("copy");
+            document.getElementById("autoSaveDate").innerHTML = "클립보드에 복사됨"
+            document.body.removeChild(tempElem);
+        });
+
+        toolbar.insertItem(2, {
+        type: 'button',
+        options: {
+            className: 'first',
+            event: 'clipButton',
+            tooltip: 'Copy to clipboard',
+            text: 'Clip',
+            style: 'background:none; font-weight:bold; color:black; font-size: 1px; text-align: center;'
+        }
+        });
+
+        toolbar.insertItem(4, {
+            type: 'divider',
+            options: {
+                className: 'first',
+                text: '|',
+                style: 'background:none; color:black;'
+            }
+            });
+
         window.onload = function () {
             editor.setMarkdown(localStorage.getItem("markdown"));
             document.getElementById("autoSaveDate").innerHTML = localStorage.getItem("savedTime");
@@ -150,7 +182,7 @@ var isModified = false;
             if (isModified) {
                 save();
             }
-        }, 5000);
+        }, 3000);
 
         function save() {
             localStorage.clear;
