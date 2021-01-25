@@ -123,6 +123,7 @@ editor
             processFile(event.target.files[0]);
         };
         input.click();
+        save();
     });
 
 toolbar.insertItem(1, {
@@ -348,8 +349,8 @@ function editorBtnClick() {
 }
 
 function loadLogs() {
-    console.log(localDatas);
-
+    var logs = document.getElementById('logList');
+    logs.innerHTML = '';
 
     var logs = [];
 
@@ -368,14 +369,27 @@ function loadLogs() {
     console.log(logs);
 
     logs.forEach(l => {
-        var newP = document.createElement("p");
+        var newA1 = document.createElement("a");
 
-        newP.innerHTML = l;
+        newA1.innerHTML = 'X';
 
-        newP.setAttribute("onclick", 'setLog(this.innerText)');
+        newA1.setAttribute("id", (parseInt(l.split("  #  ")[0]) - 1) + 'a');
+        newA1.setAttribute("style", "color: red; font-weight: 700;");
+        newA1.setAttribute("onclick", 'removeLog(this.id)');
+
+        var newA2 = document.createElement("a");
+
+        newA2.innerHTML = l;
+
+        newA2.setAttribute("onclick", 'setLog(this.innerText)');
+        newA2.setAttribute("style", "margin-left: 10px");
+
+        newP = document.createElement("p");
 
         var parent = document.getElementById("logList");
 
+        parent.appendChild(newA1);
+        parent.appendChild(newA2);
         parent.appendChild(newP);
     }); 
 }
@@ -388,7 +402,37 @@ function setLog(log) {
 
     editorBtnClick();
 
-    editor.setMarkdown(localDatas[datas[1]]);
+    if (datas[0] != Object.keys(localDatas).length) {
+        save(true);
+    }
+
+    var md = localDatas[datas[1]];
+
+    editor.setMarkdown(md);
 
     editor.moveCursorToEnd();
+    
+    save();
+}
+
+function removeLog(id) {
+    var num = parseInt(id.split('a')[0]);
+
+    var key = Object.keys(localDatas)[num];
+
+    if(!confirm((num + 1) + '번 데이터를 삭제할까요?')) {
+        return;
+    }
+
+    if (num <= 0) {
+        alert("현재 작성 중인 문서가 저장됩니다.");
+    }
+
+    delete localDatas[key];
+    save(true);
+
+    loadLogs();
+    
+    document.getElementById('logList').style.display = 'none';
+    document.getElementById('logList').style.display = 'block';
 }
