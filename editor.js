@@ -1,6 +1,7 @@
 var isModified = false;
 
-var localDatas = {};
+var localLogs = {};
+var localHistorys = [];
 
 function processFile(file) {
     var reader = new FileReader();
@@ -208,14 +209,14 @@ toolbar.insertItem(4, {
 
 window.onload = function () {
 
-    localDatas = JSON.parse(localStorage.getItem("markdown"));
+    localLogs = JSON.parse(localStorage.getItem("markdown"));
 
     var savedTimes = [];
     var markdowns = [];
 
-    for (key in localDatas) {
+    for (key in localLogs) {
         savedTimes.push(key);
-        markdowns.push(localDatas[key]);
+        markdowns.push(localLogs[key]);
     }
 
     editor.setMarkdown(markdowns[markdowns.length - 1]);
@@ -226,8 +227,8 @@ window.onload = function () {
 
 autoSave = setInterval(function () {
     if (isModified) {
-        if (Object.keys(localDatas).length > 20) {
-            delete localDatas[Object.keys(localDatas)[0]];
+        if (Object.keys(localLogs).length > 20) {
+            delete localLogs[Object.keys(localLogs)[0]];
         }
         save(true);
     }
@@ -239,14 +240,14 @@ function save(isAuto = false) {
 
     if (isAuto) {
 
-        var lastKey = Object.keys(localDatas)[Object.keys(localDatas).length - 1];
-        delete localDatas[lastKey];
+        var lastKey = Object.keys(localLogs)[Object.keys(localLogs).length - 1];
+        delete localLogs[lastKey];
         
     }
-    localDatas[nowTime] = editor.getMarkdown();
+    localLogs[nowTime] = editor.getMarkdown();
 
     localStorage.clear;
-    localStorage.setItem("markdown", JSON.stringify(localDatas));
+    localStorage.setItem("markdown", JSON.stringify(localLogs));
 
     document
         .getElementById("autoSaveDate")
@@ -314,14 +315,19 @@ function openNav() {
     //document.body.style.backgroundColor = 'rgba(0,0,0)';
 }
 function closeNav() {
-    var editContent = document.getElementById('editorDrop')
-    var logContent = document.getElementById('logList')
+    var editContent = document.getElementById('editorDrop');
+    var historyContent = document.getElementById('historyList');
+    var logContent = document.getElementById('logList');
 
     document.getElementById('mysidenav').style.width = '0';
 
     editContent.style.margin = '0 auto';
     editContent.style.width = '95%';
     editContent.style.marginTop = '52px'
+
+    historyContent.style.margin = '0 auto';
+    historyContent.style.width = '92%';
+    historyContent.style.marginTop = '60px'
 
     logContent.style.margin = '0 auto';
     logContent.style.width = '92%';
@@ -333,6 +339,7 @@ function logBtnClick() {
     loadLogs()
 
     document.getElementById('editorDrop').style.display = 'none';
+    document.getElementById('historyList').style.display = 'none';
     document.getElementById('logList').style.display = 'block';
 
     closeNav();
@@ -343,6 +350,18 @@ function editorBtnClick() {
     logs.innerHTML = '';
 
     document.getElementById('editorDrop').style.display = 'block';
+    document.getElementById('historyList').style.display = 'none';
+    document.getElementById('logList').style.display = 'none';
+
+    closeNav();
+}
+
+function historyBtnClick() {
+
+    loadHistorys()
+
+    document.getElementById('editorDrop').style.display = 'none';
+    document.getElementById('historyList').style.display = 'block';
     document.getElementById('logList').style.display = 'none';
 
     closeNav();
@@ -357,9 +376,9 @@ function loadLogs() {
     var savedTimes = [];
     var markdowns = [];
 
-    for (key in localDatas) {
+    for (key in localLogs) {
         savedTimes.push(key);
-        markdowns.push(localDatas[key]);
+        markdowns.push(localLogs[key]);
     }
 
     for (var i = 0; i < savedTimes.length; i++) {
@@ -394,6 +413,49 @@ function loadLogs() {
     }); 
 }
 
+function loadHistorys() {
+    localHistorys = JSON.parse(localStorage.getItem('history'));
+
+    console.log(localHistorys);
+
+    var historyL = document.getElementById('historyList');
+    historyL.innerHTML = '';
+
+    var historys = [];
+
+    var markdowns = [];
+
+
+    for (var i = 0; i < localHistorys.length; i++) {
+        historys.push(((i + 1) + " # " + localHistorys[i]).substr(0, 300) + "...")
+    }
+
+    console.log(historys);
+
+    historys.forEach(h => {
+        var newA1 = document.createElement("a");
+
+        newA1.innerHTML = 'X';
+
+        newA1.setAttribute("id", (parseInt(h.split("  #  ")[0]) - 1) + 'a');
+        newA1.setAttribute("style", "color: red; font-weight: 700;");
+        newA1.setAttribute("onclick", 'removeHistory(this.id)');
+
+        var newA2 = document.createElement("a");
+
+        newA2.innerHTML = h;
+
+        newA2.setAttribute("onclick", 'setHistory(this.innerText)');
+        newA2.setAttribute("style", "margin-left: 10px");
+
+        newP = document.createElement("p");
+
+        historyL.appendChild(newA1);
+        historyL.appendChild(newA2);
+        historyL.appendChild(newP);
+    }); 
+}
+
 function setLog(log) {
     var datas = log.split(' # ');
     if(!confirm(datas[0] + '번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)')) {
@@ -402,11 +464,11 @@ function setLog(log) {
 
     editorBtnClick();
 
-    if (datas[0] != Object.keys(localDatas).length) {
+    if (datas[0] != Object.keys(localLogs).length) {
         save(true);
     }
 
-    var md = localDatas[datas[1]];
+    var md = localLogs[datas[1]];
 
     editor.setMarkdown(md);
 
@@ -415,10 +477,31 @@ function setLog(log) {
     save();
 }
 
+function setHistory(history) {
+    var historyInfo = history.split(' # ');
+    if(!confirm(historyInfo[0] + '번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)')) {
+        return;
+    }
+
+    editorBtnClick();
+
+    var md = localHistorys[parseInt(historyInfo[0]) - 1];
+
+    console.log(md);
+
+    editor.setMarkdown(md);
+
+    editor.moveCursorToEnd();
+
+    //localHistorys.splice(parseInt(historyInfo[0]) - 1, 1);
+
+
+}
+
 function removeLog(id) {
     var num = parseInt(id.split('a')[0]);
 
-    var key = Object.keys(localDatas)[num];
+    var key = Object.keys(localLogs)[num];
 
     if(!confirm((num + 1) + '번 데이터를 삭제할까요?')) {
         return;
@@ -428,11 +511,53 @@ function removeLog(id) {
         alert("현재 작성 중인 문서가 저장됩니다.");
     }
 
-    delete localDatas[key];
+    delete localLogs[key];
     save(true);
 
     loadLogs();
     
     document.getElementById('logList').style.display = 'none';
     document.getElementById('logList').style.display = 'block';
+}
+
+function removeHistory(id) {
+    var idx = parseInt(id.split('a')[0]);
+
+    if(!confirm((idx + 1) + '번 데이터를 삭제할까요?')) {
+        return;
+    }
+
+    localHistorys.splice(idx, 1);
+
+    saveHistory();
+
+    loadHistorys();
+    
+    document.getElementById('historyList').style.display = 'none';
+    document.getElementById('historyList').style.display = 'block';
+}
+
+$(document).keydown(function(event) {
+    // If Control or Command key is pressed and the S key is pressed
+    // run save function. 83 is the key code for S.
+    if((event.ctrlKey || event.metaKey) && event.which == 83) {
+        // Save Function
+
+        saveHistory(true);
+        alert("저장되었습니다.");
+        event.preventDefault();
+        return false;
+    };
+}
+);
+
+function saveHistory(isCmd = false) {
+
+    if (isCmd) {
+        localHistorys.push(editor.getMarkdown());
+    }
+
+    localStorage.removeItem('history');
+    localStorage.setItem('history', JSON.stringify(localHistorys));
+
 }
