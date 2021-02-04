@@ -1,7 +1,7 @@
 var isModified = false;
 
 var localLogs = {};
-var localHistorys = [];
+var localHistoryList = [];
 
 function processFile(file) {
     var reader = new FileReader();
@@ -306,32 +306,10 @@ holder.ondrop = function (e) {
 };
 
 function openNav() {
-    
     document.getElementById('mysidenav').style.width = '200px';
-
-    //document.getElementById('editorDrop').style.marginLeft = '200px';
-
-    //document.getElementById('logList').style.marginLeft = '200px';
-    //document.body.style.backgroundColor = 'rgba(0,0,0)';
 }
 function closeNav() {
-    var editContent = document.getElementById('editorDrop');
-    var historyContent = document.getElementById('historyList');
-    var logContent = document.getElementById('logList');
-
     document.getElementById('mysidenav').style.width = '0';
-
-    editContent.style.margin = '0 auto';
-    editContent.style.width = '95%';
-    editContent.style.marginTop = '52px'
-
-    historyContent.style.margin = '0 auto';
-    historyContent.style.width = '92%';
-    historyContent.style.marginTop = '60px'
-
-    logContent.style.margin = '0 auto';
-    logContent.style.width = '92%';
-    logContent.style.marginTop = '60px'
 }
 
 function logBtnClick() {
@@ -340,16 +318,15 @@ function logBtnClick() {
 
     document.getElementById('editorDrop').style.display = 'none';
     document.getElementById('historyList').style.display = 'none';
-    document.getElementById('logList').style.display = 'block';
+    document.getElementById('logList').style.display = '';
 
     closeNav();
+
 }
 
 function editorBtnClick() {
-    var logs = document.getElementById('logList');
-    logs.innerHTML = '';
 
-    document.getElementById('editorDrop').style.display = 'block';
+    document.getElementById('editorDrop').style.display = '';
     document.getElementById('historyList').style.display = 'none';
     document.getElementById('logList').style.display = 'none';
 
@@ -357,21 +334,21 @@ function editorBtnClick() {
 }
 
 function historyBtnClick() {
-
     loadHistorys()
 
     document.getElementById('editorDrop').style.display = 'none';
-    document.getElementById('historyList').style.display = 'block';
+    document.getElementById('historyList').style.display = '';
     document.getElementById('logList').style.display = 'none';
 
     closeNav();
+
 }
 
 function loadLogs() {
-    var logs = document.getElementById('logList');
-    logs.innerHTML = '';
+    var logEl = document.querySelector('#logList');
+    logEl.textContent = '';
 
-    var logs = [];
+    var logList = [];
 
     var savedTimes = [];
     var markdowns = [];
@@ -382,171 +359,121 @@ function loadLogs() {
     }
 
     for (var i = 0; i < savedTimes.length; i++) {
-        logs.push(((i + 1) + " # " + savedTimes[i] + " # " + markdowns[i]).substr(0, 300) + "...")
+        logList.push(((i + 1) + " # " + savedTimes[i] + " # " + markdowns[i]).substr(0, 200) + "...")
     }
 
-    console.log(logs);
+    logList.forEach(l => {
+        var newContent = document.createElement('p');
+        newContent.innerHTML = `<button>삭제</button>&nbsp<span> ${l} </span>`;
 
-    logs.forEach(l => {
-        var newA1 = document.createElement("a");
+        newContent.querySelector('button').addEventListener('click', () => {
+            var idx = newContent.querySelector("span").innerHTML.split(" # ")[0];
+            if (confirm(`${idx}번 데이터를 삭제하시겠습니까?`)) {
 
-        newA1.innerHTML = 'X';
+                console.log(Object.keys(localLogs)[idx - 1]);
 
-        newA1.setAttribute("id", (parseInt(l.split("  #  ")[0]) - 1) + 'a');
-        newA1.setAttribute("style", "color: red; font-weight: 700;");
-        newA1.setAttribute("onclick", 'removeLog(this.id)');
+                delete localLogs[Object.keys(localLogs)[idx - 1]];
+                save(true);
 
-        var newA2 = document.createElement("a");
+                loadLogs();
+                
+                logEl.style.display = 'none';
+                logEl.style.display = '';
+            }
+        });
 
-        newA2.innerHTML = l;
+        newContent.querySelector("span").addEventListener('click', () => {
 
-        newA2.setAttribute("onclick", 'setLog(this.innerText)');
-        newA2.setAttribute("style", "margin-left: 10px");
+            var logInfo = newContent.querySelector("span").innerHTML.split(" # ");
 
-        newP = document.createElement("p");
+            if(!confirm(`${+logInfo[0]}번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)`)) {
+                return;
+            }
+        
+            editorBtnClick();
+        
+            var md = localLogs[logInfo[1]];
+        
+            editor.setMarkdown(md);
+        
+            editor.moveCursorToEnd();
 
-        var parent = document.getElementById("logList");
+            save();
+        });
 
-        parent.appendChild(newA1);
-        parent.appendChild(newA2);
-        parent.appendChild(newP);
+        logEl.appendChild(newContent);
     }); 
 }
 
 function loadHistorys() {
-    localHistorys = JSON.parse(localStorage.getItem('history'));
+    localHistoryList = JSON.parse(localStorage.getItem('history'));
 
-    console.log(localHistorys);
+    var historyEl = document.querySelector('#historyList');
+    historyEl.innerHTML = '';
 
-    var historyL = document.getElementById('historyList');
-    historyL.innerHTML = '';
+    var historyList = [];
 
-    var historys = [];
-
-    var markdowns = [];
-
-
-    for (var i = 0; i < localHistorys.length; i++) {
-        historys.push(((i + 1) + " # " + localHistorys[i]).substr(0, 300) + "...")
+    for (var i = 0; i < localHistoryList.length; i++) {
+        historyList.push(((i + 1) + " # " + localHistoryList[i]).substr(0, 200) + "...")
     }
 
-    console.log(historys);
+    historyList.forEach(h => {
 
-    historys.forEach(h => {
-        var newA1 = document.createElement("a");
+        var newContent = document.createElement('p');
+        newContent.innerHTML = `<button>삭제</button>&nbsp<span> ${h} </span>`;
 
-        newA1.innerHTML = 'X';
+        newContent.querySelector('button').addEventListener('click', () => {
 
-        newA1.setAttribute("id", (parseInt(h.split("  #  ")[0]) - 1) + 'a');
-        newA1.setAttribute("style", "color: red; font-weight: 700;");
-        newA1.setAttribute("onclick", 'removeHistory(this.id)');
+            var idx = +newContent.querySelector("span").innerHTML.split(" # ")[0];
 
-        var newA2 = document.createElement("a");
+            if (confirm(`${idx}번 데이터를 삭제하시겠습니까?`)) {
 
-        newA2.innerHTML = h;
+                localHistoryList.splice(idx - 1, 1);
 
-        newA2.setAttribute("onclick", 'setHistory(this.innerText)');
-        newA2.setAttribute("style", "margin-left: 10px");
+                saveHistory();
 
-        newP = document.createElement("p");
+                loadHistorys();
+                
+                historyEl.style.display = 'none';
+                historyEl.style.display = '';
 
-        historyL.appendChild(newA1);
-        historyL.appendChild(newA2);
-        historyL.appendChild(newP);
+            }
+
+        });
+
+        newContent.querySelector("span").addEventListener('click', () => {
+
+            var idx = +newContent.querySelector("span").innerHTML.split(" # ")[0];
+
+            if(!confirm(`${idx}번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)`)) {
+                return;
+            }
+        
+            editorBtnClick();
+        
+            var md = localHistoryList[idx - 1];
+        
+            editor.setMarkdown(md);
+        
+            editor.moveCursorToEnd();
+
+            save();
+        });
+
+        historyEl.appendChild(newContent);
+
     }); 
 }
 
-function setLog(log) {
-    var datas = log.split(' # ');
-    if(!confirm(datas[0] + '번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)')) {
-        return;
-    }
-
-    editorBtnClick();
-
-    if (datas[0] != Object.keys(localLogs).length) {
-        save(true);
-    }
-
-    var md = localLogs[datas[1]];
-
-    editor.setMarkdown(md);
-
-    editor.moveCursorToEnd();
-    
-    save();
-}
-
-function setHistory(history) {
-    var historyInfo = history.split(' # ');
-    if(!confirm(historyInfo[0] + '번 데이터를 불러올까요? (기존 내용은 삭제 됩니다.)')) {
-        return;
-    }
-
-    editorBtnClick();
-
-    var md = localHistorys[parseInt(historyInfo[0]) - 1];
-
-    console.log(md);
-
-    editor.setMarkdown(md);
-
-    editor.moveCursorToEnd();
-
-    //localHistorys.splice(parseInt(historyInfo[0]) - 1, 1);
-
-
-}
-
-function removeLog(id) {
-    var num = parseInt(id.split('a')[0]);
-
-    var key = Object.keys(localLogs)[num];
-
-    if(!confirm((num + 1) + '번 데이터를 삭제할까요?')) {
-        return;
-    }
-
-    if (num <= 0) {
-        alert("현재 작성 중인 문서가 저장됩니다.");
-    }
-
-    delete localLogs[key];
-    save(true);
-
-    loadLogs();
-    
-    document.getElementById('logList').style.display = 'none';
-    document.getElementById('logList').style.display = 'block';
-}
-
-function removeHistory(id) {
-    var idx = parseInt(id.split('a')[0]);
-
-    if(!confirm((idx + 1) + '번 데이터를 삭제할까요?')) {
-        return;
-    }
-
-    localHistorys.splice(idx, 1);
-
-    saveHistory();
-
-    loadHistorys();
-    
-    document.getElementById('historyList').style.display = 'none';
-    document.getElementById('historyList').style.display = 'block';
-}
-
 $(document).keydown(function(event) {
-    // If Control or Command key is pressed and the S key is pressed
-    // run save function. 83 is the key code for S.
+
     if((event.ctrlKey || event.metaKey) && event.which == 83) {
-        // Save Function
 
         saveHistory(true);
         alert("저장되었습니다.");
         event.preventDefault();
         return false;
+
     };
 }
 );
@@ -554,10 +481,10 @@ $(document).keydown(function(event) {
 function saveHistory(isCmd = false) {
 
     if (isCmd) {
-        localHistorys.push(editor.getMarkdown());
+        localHistoryList.push(editor.getMarkdown());
     }
 
     localStorage.removeItem('history');
-    localStorage.setItem('history', JSON.stringify(localHistorys));
+    localStorage.setItem('history', JSON.stringify(localHistoryList));
 
 }

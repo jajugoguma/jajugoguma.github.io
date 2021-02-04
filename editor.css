@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+
+    background-color: white;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    padding: 10px 35px;
+    align-items: center;
+    flex: none;
+
+    border-bottom: #999;
+}
+
+header .openmenu img {
+    height: 60px;
+    flex: 1;
+}
+
+header .avatar img {
+    border-radius: 70%;
+    height: 60px;
+    margin: auto 0 auto auto;
+}
+
+header .block {
+    flex: 1;
+}
+
+main {
+    width: 100%; 
+    height: 100%; 
+    margin: 0; 
+    flex: 1;
+    padding: 0 35px;
+}
+
+main div {
+    width: auto;
+}
+
+main div span{
+    width: auto;
+}
+
+main p {
+    color: lightslategray;
+}
