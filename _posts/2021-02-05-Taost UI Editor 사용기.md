@@ -220,4 +220,4 @@ options: {
 조만간 위 문제들에 대해 빠르게 해결해 볼 예정입니다.
 
 지금 이 글도 저곳에서 작성되고 있습니다 :)
-<img src="https://user-images.githubusercontent.com/41339744/106932179-c41ec300-675a-11eb-8283-5633609a039c.png" style="width: 50%">
+![img](https://user-images.githubusercontent.com/41339744/106932179-c41ec300-675a-11eb-8283-5633609a039c.png)
