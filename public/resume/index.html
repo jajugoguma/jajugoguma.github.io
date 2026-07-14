@@ -8,7 +8,7 @@
 <meta name="description" content="김대연 · 프론트엔드 개발자 · NHN Cloud NCUI">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <style>
 /* ────────────────────────────────────────────
@@ -20,20 +20,16 @@
 }
 
 :root {
-  --ink: #161412;
-  --ink-2: #4A453F;
-  --ink-3: #807A72;
-  --ink-4: #B5AEA4;
-  --rule: #D8D2C5;
-  --rule-soft: #ECE7DA;
-  --accent: #7A1F14;
-  --gold: #9C7A3F;
+  --ink: #141414;
+  --ink-2: #4A4A4A;
+  --ink-3: #808080;
+  --ink-4: #B0B0B0;
+  --rule: #D5D5D5;
+  --rule-soft: #ECECEC;
   --bg-page: #FFFFFF;
-  --bg-screen: #E8E4DA;
+  --bg-screen: #E5E5E5;
 
-  --serif: 'Fraunces', 'Noto Serif KR', ui-serif, Georgia, serif;
-  --serif-kr: 'Noto Serif KR', 'Fraunces', ui-serif, serif;
-  --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
@@ -46,6 +42,7 @@ body {
   background: var(--bg-screen);
   color: var(--ink);
   font-family: var(--sans);
+  font-weight: 400;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -78,24 +75,22 @@ body {
   margin-bottom: 6mm;
 }
 .name-block .name-ko {
-  font-family: var(--serif-kr);
-  font-weight: 300;
-  font-size: 38pt;
-  line-height: 0.95;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 36pt;
+  line-height: 1;
   letter-spacing: -0.04em;
-  margin: 0 0 4pt;
+  margin: 0 0 6pt;
   color: var(--ink);
 }
 .name-block .name-en {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--sans);
   font-weight: 300;
-  font-variation-settings: 'opsz' 96, 'SOFT' 100;
-  font-size: 22pt;
-  line-height: 1;
-  letter-spacing: -0.015em;
-  color: var(--accent);
-  margin: 0 0 8pt;
+  font-size: 14pt;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  margin: 0 0 10pt;
 }
 .name-block .role {
   font-family: var(--mono);
@@ -106,7 +101,7 @@ body {
   margin: 0;
 }
 .name-block .role .dot {
-  color: var(--gold);
+  color: var(--ink-3);
   margin: 0 6pt;
 }
 
@@ -145,7 +140,7 @@ body {
   font-size: 9pt;
   font-weight: 500;
   letter-spacing: 0.1em;
-  color: var(--accent);
+  color: var(--ink);
 }
 .section-head .title-row {
   display: grid;
@@ -156,28 +151,17 @@ body {
   padding-bottom: 3pt;
 }
 .section-head .title {
-  font-family: var(--serif);
-  font-weight: 350;
-  font-variation-settings: 'opsz' 60, 'SOFT' 30;
-  font-size: 18pt;
-  letter-spacing: -0.01em;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 17pt;
+  letter-spacing: -0.02em;
   line-height: 1;
   color: var(--ink);
   margin: 0;
 }
 .section-head .title em {
-  font-style: italic;
-  font-variation-settings: 'opsz' 60, 'SOFT' 100;
-  color: var(--accent);
-  font-weight: 300;
-}
-.section-head .title .ko {
-  font-family: var(--serif-kr);
   font-style: normal;
-  font-weight: 300;
-  font-size: 0.9em;
-  margin-left: 8pt;
-  color: var(--ink-3);
+  font-weight: 600;
 }
 
 /* ────────────────────────────────────────────
@@ -192,11 +176,9 @@ body {
 }
 .about-text strong { font-weight: 600; }
 .about-text em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-variation-settings: 'opsz' 18, 'SOFT' 100;
-  color: var(--accent);
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
 }
 
 /* ────────────────────────────────────────────
@@ -221,9 +203,8 @@ body {
   letter-spacing: 0.01em;
 }
 .career .org {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 18;
+  font-family: var(--sans);
+  font-weight: 600;
   font-size: 11pt;
   width: 28mm;
   letter-spacing: -0.005em;
@@ -243,7 +224,7 @@ body {
 }
 
 /* ────────────────────────────────────────────
-   PROJECTS
+   PROJECTS / METHOD BLOCKS
    ──────────────────────────────────────────── */
 .project, .method-block {
   padding: 5mm 0;
@@ -258,23 +239,20 @@ body {
   grid-template-columns: 1fr auto;
   gap: 12pt;
   align-items: baseline;
-  margin-bottom: 1pt;
+  margin-bottom: 6pt;
 }
 .project-title {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-variation-settings: 'opsz' 36, 'SOFT' 30;
-  font-size: 15pt;
-  letter-spacing: -0.015em;
-  line-height: 1.15;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13.5pt;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   margin: 0;
   color: var(--ink);
 }
 .project-title em {
-  font-style: italic;
-  font-variation-settings: 'opsz' 36, 'SOFT' 100;
-  color: var(--accent);
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 600;
 }
 .project-meta {
   font-family: var(--mono);
@@ -283,15 +261,6 @@ body {
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
-.project-subtitle {
-  font-family: var(--serif);
-  font-style: italic;
-  font-variation-settings: 'opsz' 18, 'SOFT' 100;
-  font-size: 10pt;
-  color: var(--ink-2);
-  margin: 0 0 5pt;
-  line-height: 1.4;
-}
 .project-lead {
   font-size: 10pt;
   line-height: 1.55;
@@ -299,11 +268,9 @@ body {
   margin: 0 0 5pt;
 }
 .project-lead em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-variation-settings: 'opsz' 14, 'SOFT' 100;
-  color: var(--accent);
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
 }
 .project-lead strong { font-weight: 600; }
 
@@ -335,15 +302,14 @@ body {
   color: var(--ink);
 }
 .points > li em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-variation-settings: 'opsz' 14, 'SOFT' 100;
-  color: var(--accent);
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
 }
 .points > li code {
   font-family: var(--mono);
   font-size: 0.86em;
+  font-weight: 500;
   color: var(--ink);
   background: var(--rule-soft);
   padding: 0.5pt 3pt;
@@ -352,17 +318,16 @@ body {
 }
 .points .arrow {
   font-family: var(--mono);
-  color: var(--accent);
+  color: var(--ink-2);
   margin: 0 3pt;
   font-weight: 500;
 }
 .points .metric {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 500;
-  font-variation-settings: 'opsz' 18, 'SOFT' 50;
-  color: var(--accent);
-  font-size: 1.05em;
+  font-family: var(--sans);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 1.0em;
   letter-spacing: -0.01em;
 }
 
@@ -398,8 +363,8 @@ body {
   letter-spacing: 0.06em;
 }
 .stack .label {
-  color: var(--accent);
-  font-weight: 500;
+  color: var(--ink);
+  font-weight: 600;
   margin-right: 6pt;
 }
 
@@ -418,15 +383,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.footer-mark .end {
-  font-family: var(--serif);
-  font-style: italic;
-  font-variation-settings: 'opsz' 14, 'SOFT' 100;
-  font-size: 10pt;
-  color: var(--accent);
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 /* ────────────────────────────────────────────
@@ -468,6 +424,7 @@ body {
   border-radius: 4px;
   font-family: var(--mono);
   font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.04em;
   cursor: pointer;
   border: none;
@@ -503,7 +460,7 @@ body {
       <h1 class="name-ko">김대연</h1>
       <div class="name-en">Daeyeon Kim</div>
       <p class="role">
-        Frontend Developer<span class="dot">◆</span>5 yrs<span class="dot">◆</span>NHN Cloud · NCUI
+        Frontend Developer<span class="dot">·</span>5 yrs<span class="dot">·</span>NHN Cloud · NCUI
       </p>
     </div>
     <div class="contact-block">
@@ -519,7 +476,7 @@ body {
     <div class="section-head">
       <span class="num">01</span>
       <div class="title-row">
-        <h2 class="title">About <em>Me</em><span class="ko">자기 소개</span></h2>
+        <h2 class="title">자기 소개</h2>
       </div>
     </div>
     <p class="about-text">
@@ -536,7 +493,7 @@ body {
     <div class="section-head">
       <span class="num">02</span>
       <div class="title-row">
-        <h2 class="title">Career <em>History</em><span class="ko">경력</span></h2>
+        <h2 class="title">경력</h2>
       </div>
     </div>
     <table class="career">
@@ -562,35 +519,34 @@ body {
     <div class="section-head">
       <span class="num">03</span>
       <div class="title-row">
-        <h2 class="title">Selected <em>Work</em><span class="ko">주요 경험</span></h2>
+        <h2 class="title">주요 경험</h2>
       </div>
     </div>
 
     <!-- NCUI Component Library -->
     <article class="project">
       <header class="project-head">
-        <h3 class="project-title">NCUI <em>Component Library</em></h3>
+        <h3 class="project-title">NCUI Component Library</h3>
         <span class="project-meta">NHN Cloud · 2022 — Present</span>
       </header>
-      <p class="project-subtitle">Design system core maintainer · 9 / 57 components shipped</p>
       <p class="project-lead">
-        NHN Cloud 콘솔 전반에 사용되는 UI 컴포넌트 라이브러리.
+        NHN Cloud 콘솔 전반에 사용되는 UI 컴포넌트 라이브러리입니다.
         약 4년간 개발·운영하며 <strong>전체 57개 코어 컴포넌트 중 9개를 직접 설계·구현</strong>했고
         56개에 유지보수로 직접 관여했습니다.
       </p>
       <ul class="points">
         <li>
-          <strong>DateTimePicker 3단계 진화 주도</strong> — 2023년 TimePickerSpinBox·DatePicker·DateRangePicker 등을 신규 개발해 날짜·시각 선택 컴포넌트군을 추가. 사용 사례 확장에 따라 두 차례 리팩터링 수행.
+          <strong>DateTimePicker 3단계 진화 주도</strong> — 2023년 TimePickerSpinBox·DatePicker·DateRangePicker 등을 신규 개발해 날짜·시각 선택 컴포넌트군을 추가했습니다. 사용 사례 확장에 따라 두 차례 리팩터링을 수행했습니다.
           <ul class="sub">
             <li>1차: <code>DatePicker</code> 상태 관리 hook과 <code>DateTimeInput</code> 분리, 폴더 구조 정리로 유지보수 용이성 확보</li>
             <li>2차: segment(yyyy/mm/dd/hh/mm/AM·PM) 단위 상태를 관리하는 <code>useSegmentManager</code>를 최상위로 승격해 <strong>단일 상태 모델로 통합</strong>, <code>navigationDate</code> 개념으로 "달력 표시 월"과 "선택 값" 분리</li>
           </ul>
         </li>
         <li>
-          <strong>Table 컴포넌트 장기 진화</strong> — 초기 children 합성 패턴 도입(2023)부터 가로 스크롤·indeterminate Header Checkbox·이벤트 핸들러 중단 가능 API 등 4년에 걸친 점진적 확장. <strong>디자인 토큰·CSS Modules 마이그레이션</strong> 주도.
+          <strong>Table 컴포넌트 장기 진화</strong> — 초기 children 합성 패턴 도입(2023)부터 가로 스크롤·indeterminate Header Checkbox·이벤트 핸들러 중단 가능 API 등 4년에 걸쳐 점진적으로 확장했고, <strong>디자인 토큰·CSS Modules 마이그레이션</strong>을 주도했습니다.
         </li>
         <li>
-          <strong>LiveEditor 자체 발의·개발</strong> — "정적 코드 블록만으로는 컴포넌트 사용법 학습이 어렵다"는 사용자 의견에서 출발해 공식 업무 없이 발의. <code>esbuild-wasm</code> 기반 브라우저 번들링, NPM Registry 연동 모듈, 모듈 리졸버 서브경로 해석, 의존성 캐시 전략까지 구현해 <em>임의 패키지를 브라우저에서 즉시 실행하는 환경</em>을 구축. <strong>팀 공통 문서 인프라</strong>로 자리잡음.
+          <strong>LiveEditor 자체 발의·개발</strong> — "정적 코드 블록만으로는 컴포넌트 사용법 학습이 어렵다"는 사용자 의견에서 출발해 공식 업무 없이 직접 발의했습니다. <code>esbuild-wasm</code> 기반 브라우저 번들링, NPM Registry 연동 모듈, 모듈 리졸버 서브경로 해석, 의존성 캐시 전략까지 구현해 <em>임의 패키지를 브라우저에서 즉시 실행하는 환경</em>을 구축했고, 이후 <strong>팀 공통 문서 인프라</strong>로 자리잡았습니다.
         </li>
       </ul>
       <p class="stack"><span class="label">STACK</span>React · TypeScript · CSS Modules · Design Tokens · esbuild-wasm</p>
@@ -599,24 +555,23 @@ body {
     <!-- NCUI DataGrid -->
     <article class="project">
       <header class="project-head">
-        <h3 class="project-title">NCUI <em>DataGrid</em></h3>
-        <span class="project-meta">NHN Cloud · 11 mo · 0→1</span>
+        <h3 class="project-title">NCUI DataGrid</h3>
+        <span class="project-meta">NHN Cloud · 2024 — Present</span>
       </header>
-      <p class="project-subtitle">Lead architect · ~600 commits cumulative · main contributor</p>
       <p class="project-lead">
-        스프레드시트 수준의 데이터 편집·조작이 필요한 콘솔 화면을 위해 <strong>별도 패키지로 발의·구축한 고급 데이터 그리드</strong>.
-        프로젝트 환경 설정 첫 커밋부터 직접 시작해 약 11개월간 0→1 신규 개발을 주도했고,
-        팀 공동 유지보수 단계에서도 메인 컨트리뷰터로 참여 중.
+        스프레드시트 수준의 데이터 편집·조작이 필요한 콘솔 화면을 위해 <strong>별도 패키지로 발의·구축한 고급 데이터 그리드</strong>입니다.
+        프로젝트 환경 설정 첫 커밋부터 직접 시작해 약 11개월간 신규 개발을 주도했고,
+        팀 공동 유지보수 단계에서도 메인 컨트리뷰터로 참여 중입니다.
       </p>
       <ul class="points">
         <li>
-          <strong>아키텍처 설계</strong> — TanStack Table을 코어 엔진으로 채택하되, 공개 API와 디자인은 NCUI 컨벤션으로 추상화하는 <em>래퍼 계층</em>을 직접 설계. 자체 상태 관리에서 <strong>컨텍스트 기반 구조</strong>로 재구성.
+          <strong>아키텍처 설계</strong> — TanStack Table을 코어 엔진으로 채택하되, 공개 API와 디자인은 NCUI 컨벤션으로 추상화하는 <em>래퍼 계층</em>을 직접 설계했습니다. 자체 상태 관리에서 <strong>컨텍스트 기반 구조</strong>로 재구성했습니다.
         </li>
         <li>
-          <strong>핵심 기능 구현</strong> — 컬럼 리사이징/DnD/고정/그룹 헤더, Cell/Row/Column 셀렉션, 컨텍스트 메뉴, 복사/붙여넣기, 빌트인 에디터(텍스트·Select·Combobox·Date)와 편집 중 유효성 검사, <strong>Undo/Redo 히스토리(편집·<code>setValue</code>·<code>setRow</code>·<code>appendRow</code> 전 동작 대응)</strong>, Row Expand, <strong>Tree Grid</strong>, 페이지네이션·정렬·필터·DnD 전 영역의 <code>onBeforeXxx</code> 이벤트, 클립보드 직렬화, 다국어(i18n) 등.
+          <strong>핵심 기능 구현</strong> — 컬럼 리사이징/DnD/고정/그룹 헤더, Cell/Row/Column 셀렉션, 컨텍스트 메뉴, 복사/붙여넣기, 빌트인 에디터(텍스트·Select·Combobox·Date)와 편집 중 유효성 검사, <strong>Undo/Redo 히스토리(편집·<code>setValue</code>·<code>setRow</code>·<code>appendRow</code> 전 동작 대응)</strong>, Row Expand, <strong>Tree Grid</strong>, 페이지네이션·정렬·필터·DnD 전 영역의 <code>onBeforeXxx</code> 이벤트, 클립보드 직렬화, 다국어(i18n) 등을 직접 설계·구현했습니다.
         </li>
         <li>
-          <strong>API & UX 개선</strong> — 외부에서 그리드 인스턴스를 제어하는 데이터 조작·체크 행 조회·편집 종료/취소·셀 선택 API를 일관된 형태로 정비. 외부 클릭 시 편집 종료, <code>enableColumnSelection</code>·DnD 디커플링 등 정합성 이슈 지속 보완.
+          <strong>API & UX 개선</strong> — 외부에서 그리드 인스턴스를 제어하는 데이터 조작·체크 행 조회·편집 종료/취소·셀 선택 API를 일관된 형태로 정비했습니다. 외부 클릭 시 편집 종료, <code>enableColumnSelection</code>·DnD 디커플링 등 정합성 이슈를 지속적으로 보완했습니다.
         </li>
         <li>
           외부 엔진을 활용하면서도 디자인 시스템과 통합된 일관 API를 제공하는 <em>추상화 레이어 설계</em>, 편집·히스토리·이벤트가 얽힌 복잡한 상태 머신 안정화, 팀원 기여를 위한 폴더·이벤트·API 컨벤션 정립까지 <strong>장기 유지보수 친화적 설계</strong> 역량을 길렀습니다.
@@ -628,22 +583,21 @@ body {
     <!-- TOAST UI Grid -->
     <article class="project">
       <header class="project-head">
-        <h3 class="project-title">TOAST UI <em>Grid</em></h3>
+        <h3 class="project-title">TOAST UI Grid</h3>
         <span class="project-meta">NHN · TOAST UI팀 · 2021 — 2022</span>
       </header>
-      <p class="project-subtitle">Open source maintainer · Performance & complex data UI</p>
       <p class="project-lead">
-        오픈소스 데이터 그리드 컴포넌트를 메인테이닝하면서 <strong>대량 데이터 처리, 셀 병합, 선택/편집, 붙여넣기, 행 높이, 포커스 처리</strong> 등 복잡한 데이터 UI 기능 개선과 버그 수정 수행.
+        오픈소스 데이터 그리드 컴포넌트를 메인테이닝하면서 <strong>대량 데이터 처리, 셀 병합, 선택/편집, 붙여넣기, 행 높이, 포커스 처리</strong> 등 복잡한 데이터 UI 기능 개선과 버그 수정을 수행했습니다.
       </p>
       <ul class="points">
         <li>
-          <strong>성능 병목 분석으로 100만 셀 데이터 설정 시간을 <span class="metric">약 10분<span class="arrow">→</span>0.6초</span> 수준으로 단축</strong> — 불필요한 전체 데이터 처리와 반복 갱신 제거.
+          <strong>성능 병목 분석으로 100만 셀 데이터 설정 시간을 <span class="metric">약 10분<span class="arrow">→</span>0.6초</span> 수준으로 단축</strong> — 불필요한 전체 데이터 처리와 반복 갱신을 제거했습니다.
         </li>
         <li>
-          <strong>동일 값 연속 셀 동적 병합 기능 개발</strong> — 필터·정렬·Drag &amp; Drop·페이지네이션·셀 편집 등 데이터 상태 변화에도 병합 일관성이 유지되도록 처리.
+          <strong>동일 값 연속 셀 동적 병합 기능 개발</strong> — 필터·정렬·Drag &amp; Drop·페이지네이션·셀 편집 등 데이터 상태 변화에도 병합 일관성이 유지되도록 처리했습니다.
         </li>
         <li>
-          Grid가 단순 테이블이 아니라 <em>대량 데이터·사용자 조작·렌더링 상태가 밀접하게 연결된 애플리케이션</em>이라는 점을 체감. 복잡한 데이터 UI 개선 시 <strong>데이터 변경 흐름과 사용자 조작 시나리오 전체</strong>를 함께 고려해야 한다는 점을 학습.
+          Grid가 단순 테이블이 아니라 <em>대량 데이터·사용자 조작·렌더링 상태가 밀접하게 연결된 애플리케이션</em>이라는 점을 체감했습니다. 복잡한 데이터 UI 개선 시 <strong>데이터 변경 흐름과 사용자 조작 시나리오 전체</strong>를 함께 고려해야 한다는 점을 배웠습니다.
         </li>
       </ul>
       <p class="stack"><span class="label">STACK</span>TypeScript · Performance Engineering · Open Source</p>
@@ -652,26 +606,25 @@ body {
     <!-- Console Builder -->
     <article class="project">
       <header class="project-head">
-        <h3 class="project-title">Console <em>Builder</em></h3>
+        <h3 class="project-title">Console Builder</h3>
         <span class="project-meta">NHN Cloud · 2025.11 — Present</span>
       </header>
-      <p class="project-subtitle">No-code visual builder · JSXN serialization system</p>
       <p class="project-lead">
-        NCUI 컴포넌트로 콘솔 화면을 <em>비주얼하게 조립</em>하고 코드를 산출하는 <strong>노코드형 콘솔 화면 빌더</strong>.
-        2024년 초기 PoC에서 받은 피드백을 기반으로, 2025년 11월부터 모노레포 전환 및 JSXN 직렬화 시스템과 빌더 UI 전반을 새로 설계·구축.
+        NCUI 컴포넌트로 콘솔 화면을 <em>비주얼하게 조립</em>하고 코드를 산출하는 <strong>노코드형 콘솔 화면 빌더</strong>입니다.
+        2024년 초기 PoC에서 받은 피드백을 기반으로, 2025년 11월부터 모노레포 전환 및 JSXN 직렬화 시스템과 빌더 UI 전반을 새로 설계·구축했습니다.
       </p>
       <ul class="points">
         <li>
           <strong>JSXN 직렬화 시스템 설계</strong> — JSON 형태로 표현되는 자체 트리 모델을 설계해 <strong>React 코드 ↔ JSXN 양방향 변환</strong>을 구현. 초기 <code>jsxn-converter</code>에서 한 번의 구조 개편을 거쳐 <em><code>jsxn-tree</code> 모델</em>로 전환, 트리 조작과 테스트 가능성을 끌어올렸습니다.
         </li>
         <li>
-          <strong>비주얼 에디터 UI 구축</strong> — Canvas, TreeView 패널, 컴포넌트 목록 패널, Property 컨트롤 패널을 직접 설계·연결. <strong>Canvas 다중 선택</strong>, <strong>TreeView ↔ Canvas 양방향 호버·선택 동기화</strong>(자동 펼침/스크롤), 외부 드롭, alt+Click 부모 선택, 일괄 삭제, 그룹화/해제, 페이지 간 노드 복사/붙여넣기 등 <em>실제 편집 도구 수준의 인터랙션</em>.
+          <strong>비주얼 에디터 UI 구축</strong> — Canvas, TreeView 패널, 컴포넌트 목록 패널, Property 컨트롤 패널을 직접 설계·연결했습니다. <strong>Canvas 다중 선택</strong>, <strong>TreeView ↔ Canvas 양방향 호버·선택 동기화</strong>(자동 펼침/스크롤), 외부 드롭, alt+Click 부모 선택, 일괄 삭제, 그룹화/해제, 페이지 간 노드 복사/붙여넣기 등 <em>실제 편집 도구 수준의 인터랙션</em>을 구현했습니다.
         </li>
         <li>
-          <strong>템플릿·패턴 시스템</strong> — 컴포넌트를 묶어 재사용 가능한 단위로 만드는 <strong>템플릿</strong>(중첩 참조 재귀 해석, <code>unlinkTemplate</code>, 편집 진입/돌아가기 흐름)과 FormField·FormLayout 같은 도메인 단위 합성 블록을 제공하는 <strong>패턴 레지스트리</strong> 도입.
+          <strong>템플릿·패턴 시스템</strong> — 컴포넌트를 묶어 재사용 가능한 단위로 만드는 <strong>템플릿</strong>(중첩 참조 재귀 해석, <code>unlinkTemplate</code>, 편집 진입/돌아가기 흐름)과 FormField·FormLayout 같은 도메인 단위 합성 블록을 제공하는 <strong>패턴 레지스트리</strong>를 도입했습니다.
         </li>
         <li>
-          Undo/Redo 히스토리, URL 공유로 작업 상태 재현, 캔버스 미리보기 및 Framework 토글 등 빌더의 실사용성을 끌어올림. 외부 PoC를 인수해 본 제품 수준으로 끌어올린 <strong>레거시 정리 능력</strong>을 함께 길렀습니다.
+          Undo/Redo 히스토리, URL 공유로 작업 상태 재현, 캔버스 미리보기 및 Framework 토글 등 빌더의 실사용성을 끌어올렸습니다. 외부 PoC를 인수해 본 제품 수준으로 끌어올린 <strong>레거시 정리 능력</strong>을 함께 길렀습니다.
         </li>
       </ul>
       <p class="stack"><span class="label">STACK</span>Monorepo · JSX/AST · React · TypeScript · Visual Editor</p>
@@ -684,16 +637,15 @@ body {
     <div class="section-head">
       <span class="num">04</span>
       <div class="title-row">
-        <h2 class="title">Way of <em>Working</em><span class="ko">일하는 방식</span></h2>
+        <h2 class="title">일하는 방식</h2>
       </div>
     </div>
 
     <article class="method-block">
       <header class="project-head">
-        <h3 class="project-title">협업 <em>방식</em></h3>
+        <h3 class="project-title">협업 방식</h3>
         <span class="project-meta">Cross-functional · Designer · Devs</span>
       </header>
-      <p class="project-subtitle">Communicating engineering constraints across disciplines</p>
       <p class="project-lead">
         오픈소스 메인테이너로 일하던 시절부터 외부 사용자 문의를 직접 응대해 왔고,
         사내 라이브러리 개발자로 옮겨온 뒤에는 <em>디자이너·다른 팀 개발자</em>와 더 긴밀하게 호흡을 맞추고 있습니다.
@@ -713,23 +665,22 @@ body {
 
     <article class="method-block">
       <header class="project-head">
-        <h3 class="project-title">AI 활용과 <em>생산성 환경</em></h3>
+        <h3 class="project-title">AI 활용과 생산성 환경</h3>
         <span class="project-meta">Self-built tooling · Skills · CLI</span>
       </header>
-      <p class="project-subtitle">Designing the workflow, not just consuming the tool</p>
       <p class="project-lead">
         단순히 AI 도구를 <em>사용</em>하는 데 그치지 않고,
         <strong>자신의 업무 흐름에 맞는 자동화 환경을 직접 설계하고 만들어</strong> 사용하고 있습니다.
       </p>
       <ul class="points">
         <li>
-          <strong>업무 보고 자동화 Skill</strong> — 진행 중인 작업 내역과 AI와의 논의 결과를 <strong>팀의 기존 업무 포맷에 맞춰 자동 정리</strong>해 주는 Skill을 개발해, 진척 공유와 회고에 들이는 반복 작업 시간을 크게 단축.
+          <strong>업무 보고 자동화 Skill</strong> — 진행 중인 작업 내역과 AI와의 논의 결과를 <strong>팀의 기존 업무 포맷에 맞춰 자동 정리</strong>해 주는 Skill을 개발해, 진척 공유와 회고에 들이는 반복 작업 시간을 크게 단축했습니다.
         </li>
         <li>
-          <strong>Dooray 연동 Skill</strong> — 사내 협업 도구 Dooray와 연결되는 Skill을 직접 개발해 <strong>업무 조회·생성·코멘트·위키 작성</strong>을 IDE 안에서 처리. 도구 사이를 오가며 발생하던 <em>컨텍스트 스위칭 비용</em>을 제거.
+          <strong>Dooray 연동 Skill</strong> — 사내 협업 도구 Dooray와 연결되는 Skill을 직접 개발해 <strong>업무 조회·생성·코멘트·위키 작성</strong>을 IDE 안에서 처리할 수 있도록 했습니다. 도구 사이를 오가며 발생하던 <em>컨텍스트 스위칭 비용</em>을 제거했습니다.
         </li>
         <li>
-          <strong>병렬 작업 CLI 도구</strong> — 여러 프로젝트의 <code>git worktree</code>를 일괄 생성·관리하고, 각 worktree에서 곧바로 <strong>Claude Code 세션을 띄우는 CLI</strong>를 직접 설계·개발. 다수 작업을 병렬로 진행하는 상황에서 <em>작업 간 격리</em>와 <em>컨텍스트 전환 비용 최소화</em>를 동시에 해결.
+          <strong>병렬 작업 CLI 도구</strong> — 여러 프로젝트의 <code>git worktree</code>를 일괄 생성·관리하고, 각 worktree에서 곧바로 <strong>Claude Code 세션을 띄우는 CLI</strong>를 직접 설계·개발했습니다. 다수 작업을 병렬로 진행하는 상황에서 <em>작업 간 격리</em>와 <em>컨텍스트 전환 비용 최소화</em>를 동시에 해결했습니다.
         </li>
         <li>
           단순 <em>AI 사용자</em>에 머무르지 않고 <strong>AI를 자신의 워크플로 일부로 통합하는 환경 자체를 설계하는 사람</strong>으로서 개발자 경험(AX)을 능동적으로 끌어올리는 역량을 기르고 있습니다.
@@ -741,7 +692,6 @@ body {
   <!-- ─── FOOTER ─── -->
   <div class="footer-mark">
     <span>KIM DAEYEON · 김대연 · CV 2026</span>
-    <span class="end"><em>Fin.</em></span>
     <span>jajugoguma@gmail.com</span>
   </div>
 
